@@ -6,6 +6,8 @@ import about as About
 import gameFunctions as gf  # Event checker and update screen
 import intro  # intro video making
 import mainMenu as mm  # Main menu
+############
+import levelMenu as lm  # select game level(hard/easy)
 import playMenu as pm  # choosing ship color
 import settingsMenu as sm
 import twoPlayer as tp  # two player mode
@@ -45,9 +47,14 @@ def runGame():
     bMenu.addButton("red", "RED")
     bMenu.addButton("blue", "BLUE")
     bMenu.addButton("retry", "RETRY")
+    ##################
+    bMenu.addButton("hard", "HARD")
+    bMenu.addButton("normal", "NORMAL")
 
     mainMenuButtons = ["play", "about", "settings", "quit"] # delete "twoPlay"
     playMenuButtons = ["grey", "red", "blue", "menu", "quit"]
+    ################
+    levelMenuButtons = ["hard", "normal", "quit"]
     mainGameButtons = ["play", "menu", "quit"]
     aboutButtons = ["menu", "quit"]
     settingsMenuButtons = ["menu", "invert", "quit"]
@@ -104,6 +111,12 @@ def runGame():
         while stats.mainMenu:
             mm.checkEvents(setting, screen, stats, sb, bMenu, ship, aliens, bullets, eBullets)
             mm.drawMenu(setting, screen, sb, bMenu, bgImage, bgImageRect)
+
+        ###################
+        bMenu.setMenuButtons(levelMenuButtons)
+        while stats.levelMenu:
+            lm.checkEvents(setting, screen, stats, sb, bMenu, ship, aliens, bullets, eBullets)
+            lm.drawMenu(setting, screen, sb, bMenu, bgImage, bgImageRect)
 
         bMenu.setMenuButtons(playMenuButtons)
         while stats.playMenu:
